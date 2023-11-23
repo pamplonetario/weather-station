@@ -42,5 +42,11 @@
       "**/.pytest_cache": true
     }
   },
+  "extensions": {
+    "recommendations": [
+      "redhat.vscode-yaml",
+      "ms-azuretools.vscode-docker",
+    ]
+  },
   "launch": {}
 }
