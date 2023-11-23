@@ -1,0 +1,22 @@
+{
+  "name": "Weather Station",
+  "dockerComposeFile": [
+    "../docker-compose.yml",
+    "../src/docker/docker-compose.yml",
+    "../src/docker/docker-compose.dev-container.yml"
+  ],
+  "service": "server",
+  "overrideCommand": true,
+  "workspaceFolder": "/workspace",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "redhat.vscode-yaml",
+        "ms-azuretools.vscode-docker",
+        "tamasfe.even-better-toml",
+        "foxundermoon.shell-format",
+        "timonwong.shellcheck"
+      ]
+    }
+  }
+}

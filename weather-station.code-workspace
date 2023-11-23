@@ -1,0 +1,46 @@
+{
+  "folders": [
+    {
+      "name": "Server",
+      "path": "./src/server"
+    },
+    {
+      "name": "Database",
+      "path": "./src/database"
+    },
+    {
+      "name": "Docker",
+      "path": "./src/docker"
+    },
+    {
+      "name": "Root",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "editor.detectIndentation": false,
+    "editor.tabSize": 2,
+    "[json]": {
+      "editor.defaultFormatter": "vscode.json-language-features",
+      "files.insertFinalNewline": true
+    },
+    "[jsonc]": {
+      "editor.defaultFormatter": "vscode.json-language-features",
+      "files.insertFinalNewline": true
+    },
+    "[dockerfile]": {
+      "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+    },
+    "[yaml]": {
+      "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "[toml]": {
+      "editor.tabSize": 4,
+    },
+    "files.exclude": {
+      "**/__pycache__": true,
+      "**/.pytest_cache": true
+    }
+  },
+  "launch": {}
+}
