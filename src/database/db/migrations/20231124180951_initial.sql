@@ -1,6 +1,5 @@
-CREATE DATABASE IF NOT EXISTS `estacion_perseverance` COLLATE `utf8_unicode_ci`;
-
-CREATE TABLE IF NOT EXISTS `datosmeteo` (
+-- migrate:up
+CREATE TABLE `datosmeteo` (
   `id` int(11) PRIMARY KEY AUTO_INCREMENT,
   `temperatura` float NOT NULL,
   `humedad` float NOT NULL,
@@ -8,7 +7,7 @@ CREATE TABLE IF NOT EXISTS `datosmeteo` (
   `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-CREATE TABLE IF NOT EXISTS `estacion` (
+CREATE TABLE `estacion` (
   `id` int(11) PRIMARY KEY AUTO_INCREMENT,
   `nombre` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -23,17 +22,4 @@ ALTER TABLE `datosmeteo` ADD INDEX `datosmeteo_estacion_fecha_index` (`estacion_
 ALTER TABLE `estacion` ADD COLUMN `pass_salt` varchar(255) NULL;
 ALTER TABLE `estacion` ADD COLUMN `pass_hash` varchar(255) NULL;
 
-DELIMITER //
-
-CREATE PROCEDURE crear_estacion(IN in_nombre VARCHAR(255))
-BEGIN
-  INSERT INTO `estacion` (`nombre`) VALUES (in_nombre);
-END //
-
-CREATE PROCEDURE cambiar_clave_estacion(IN in_id VARCHAR(255), IN in_password VARCHAR(255))
-BEGIN
-  DECLARE new_salt VARCHAR(255) DEFAULT SHA1(RAND());
-  UPDATE `estacion` SET `pass_salt` = new_salt, `pass_hash` = SHA1(CONCAT(new_salt, '_', in_password)) WHERE `id` = in_id;
-END //
-
-DELIMITER ;
+-- migrate:down
