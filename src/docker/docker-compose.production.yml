@@ -1,0 +1,36 @@
+services:
+  server:
+    restart: always
+    build:
+      target: release
+    environment:
+      - METEO_DB_HOST=mysql
+      - METEO_DB_NAME=estacion_perseverance
+      - METEO_DB_USERNAME=root
+      - METEO_DB_PASSWORD=${MYSQL_ROOT_PASSWORD}
+
+  mysql:
+    restart: always
+    user: ${SERVICES_USER}
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=estacion_perseverance
+    volumes:
+      - ${MYSQL_DATA}:/var/lib/mysql
+
+  phpmyadmin:
+    restart: always
+    environment:
+      - PMA_HOST=mysql
+      - PMA_ABSOLUTE_URI=${PMA_ABSOLUTE_URI}
+
+  grafana:
+    restart: always
+    user: ${SERVICES_USER}
+    volumes:
+      - ${GRAFANA_DATA}:/var/lib/grafana
+    environment:
+      - GF_SERVER_HTTP_PORT=80
+      - GF_SERVER_DOMAIN=${GF_SERVER_DOMAIN}
+      - GF_SERVER_ROOT_URL=${GF_SERVER_ROOT_URL}
+      - GF_SERVER_SERVE_FROM_SUB_PATH=true

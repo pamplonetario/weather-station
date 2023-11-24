@@ -1,6 +1,5 @@
 services:
   server:
-    image: weather-station
     build:
       context: ./
       dockerfile: src/docker/Dockerfile
