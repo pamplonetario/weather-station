@@ -32,8 +32,8 @@ END //
 
 CREATE PROCEDURE cambiar_clave_estacion(IN in_id VARCHAR(255), IN in_password VARCHAR(255))
 BEGIN
-  UPDATE `estacion` SET `pass_salt` = SHA1(RAND()) WHERE `id` = in_id;
-  UPDATE `estacion` SET `pass_hash` = SHA1(CONCAT(`pass_salt`, '_', in_password)) WHERE `id` = in_id;
+  DECLARE new_salt VARCHAR(255) DEFAULT SHA1(RAND());
+  UPDATE `estacion` SET `pass_salt` = new_salt, `pass_hash` = SHA1(CONCAT(new_salt, '_', in_password)) WHERE `id` = in_id;
 END //
 
 DELIMITER ;
