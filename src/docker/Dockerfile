@@ -11,6 +11,8 @@ COPY --from=downloader /workdir/dbmate /usr/local/bin/dbmate
 COPY ./src/docker/start.sh ./start.sh
 CMD [ "/weather-station/start.sh" ]
 
+FROM base AS development
+
 FROM base AS release
 COPY ./src/database ./database
 COPY ./src/server /var/www/html

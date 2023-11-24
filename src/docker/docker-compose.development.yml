@@ -1,11 +1,7 @@
 services:
   server:
-    image: weather-station
     build:
-      context: ./
-      dockerfile: src/docker/Dockerfile
-      target: base
-    restart: always
+      target: development
     volumes:
       - ./src/server:/var/www/html:ro
       - ./src/database:/weather-station/database
@@ -18,9 +14,7 @@ services:
       - 127.0.0.1:8000:80
 
   mysql:
-    image: mysql:5.7-debian
     platform: linux/amd64
-    restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=estacion_perseverance
@@ -28,16 +22,12 @@ services:
       - 127.0.0.1:3306:3306
 
   phpmyadmin:
-    image: phpmyadmin:5.2
-    restart: always
     environment:
       - PMA_HOST=mysql
     ports:
       - 127.0.0.1:8001:80
 
   grafana:
-    image: grafana/grafana-oss
-    restart: always
     ports:
       - 127.0.0.1:8002:80
     environment:

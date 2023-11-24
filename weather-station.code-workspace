@@ -37,6 +37,10 @@
     "[toml]": {
       "editor.tabSize": 4,
     },
+    "[python]": {
+      "editor.tabSize": 4,
+      "editor.defaultFormatter": "ms-python.black-formatter"
+    },
     "files.exclude": {
       "**/__pycache__": true,
       "**/.pytest_cache": true
@@ -46,6 +50,7 @@
     "recommendations": [
       "redhat.vscode-yaml",
       "ms-azuretools.vscode-docker",
+      "ms-python.black-formatter"
     ]
   },
   "launch": {}
