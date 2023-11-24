@@ -6,14 +6,17 @@ from os.path import join
 def cli():
     @command
     def up():
+        """Start development environment"""
         compose("up", "--detach", "--build")
 
     @command
     def sh():
+        """Open a shell into the server container"""
         compose("exec", "server", "bash")
 
     @command
     def logs():
+        """Display the server container logs"""
         compose("logs", "-f", "server")
 
 
