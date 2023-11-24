@@ -23,6 +23,7 @@ services:
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=estacion_perseverance
     ports:
       - 127.0.0.1:3306:3306
 
