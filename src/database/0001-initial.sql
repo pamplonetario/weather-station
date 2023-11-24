@@ -22,3 +22,18 @@ ALTER TABLE `datosmeteo` ADD INDEX `datosmeteo_estacion_fecha_index` (`estacion_
 
 ALTER TABLE `estacion` ADD COLUMN `pass_salt` varchar(255) NULL;
 ALTER TABLE `estacion` ADD COLUMN `pass_hash` varchar(255) NULL;
+
+DELIMITER //
+
+CREATE PROCEDURE crear_estacion(IN in_nombre VARCHAR(255))
+BEGIN
+  INSERT INTO `estacion` (`nombre`) VALUES (in_nombre);
+END //
+
+CREATE PROCEDURE cambiar_clave_estacion(IN in_id VARCHAR(255), IN in_password VARCHAR(255))
+BEGIN
+  UPDATE `estacion` SET `pass_salt` = SHA1(RAND()) WHERE `id` = in_id;
+  UPDATE `estacion` SET `pass_hash` = SHA1(CONCAT(`pass_salt`, '_', in_password)) WHERE `id` = in_id;
+END //
+
+DELIMITER ;

@@ -64,7 +64,7 @@
         exit('<p>Error connecting to database</p>');
       }
 
-      $login = $mysqli->prepare("SELECT id FROM `estacion` WHERE id = ? AND `pass_hash` = MD5(CONCAT(`pass_salt`, '_', ?))");
+      $login = $mysqli->prepare("SELECT id FROM `estacion` WHERE id = ? AND `pass_hash` = SHA1(CONCAT(`pass_salt`, '_', ?))");
       $login->bind_param("ds", $station, $password);
       $login->execute();
       $login_result = $login->get_result();
