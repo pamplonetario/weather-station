@@ -1,3 +1,5 @@
+CREATE DATABASE IF NOT EXISTS `estacion_perseverance` COLLATE `utf8_unicode_ci`;
+
 CREATE TABLE IF NOT EXISTS `datosmeteo` (
   `id` int(11) PRIMARY KEY AUTO_INCREMENT,
   `temperatura` float NOT NULL,
@@ -17,3 +19,6 @@ ALTER TABLE `datosmeteo` CHANGE `fecha` `fecha` timestamp NOT NULL DEFAULT CURRE
 
 ALTER TABLE `datosmeteo` ADD INDEX `datosmeteo_fecha_index` (`fecha`);
 ALTER TABLE `datosmeteo` ADD INDEX `datosmeteo_estacion_fecha_index` (`estacion_id`, `fecha`);
+
+ALTER TABLE `estacion` ADD COLUMN `pass_salt` varchar(255) NULL;
+ALTER TABLE `estacion` ADD COLUMN `pass_hash` varchar(255) NULL;
