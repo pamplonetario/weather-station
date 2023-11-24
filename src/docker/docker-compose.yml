@@ -11,4 +11,4 @@ services:
     image: phpmyadmin:5.2
 
   grafana:
-    image: grafana/grafana-oss
+    image: grafana/grafana-oss:10.0.3
