@@ -1,26 +1,35 @@
 #!/usr/bin/env python3
-from os import getcwd
+from os import getcwd, environ
 from os.path import join
+from datetime import datetime
 
 
 def cli():
     @command
     def up():
         """Start development environment"""
-        compose("up", "--detach", "--build")
+        compose_dev("up", "--detach", "--build")
 
     @command
     def sh():
         """Open a shell into the server container"""
-        compose("exec", "server", "bash")
+        compose_dev("exec", "server", "bash")
 
     @command
     def logs():
         """Display the server container logs"""
-        compose("logs", "-f", "server")
+        compose_dev("logs", "-f", "server")
+
+    @command
+    def publish():
+        """Publish a relase build of the service"""
+        version = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
+        env = dict(environ, TAG=version)
+        compose_build("build", env=env)
+        compose_build("push", "weather-station-server", env=env)
 
 
-def compose(*args):
+def compose_dev(*args, **kwargs):
     cmd(
         "docker",
         "compose",
@@ -31,6 +40,22 @@ def compose(*args):
         "--project-directory",
         getcwd(),
         *args,
+        **kwargs,
+    )
+
+
+def compose_build(*args, **kwargs):
+    cmd(
+        "docker",
+        "compose",
+        "--file",
+        join(getcwd(), "src", "docker", "docker-compose.yml"),
+        "--file",
+        join(getcwd(), "src", "docker", "docker-compose.build.yml"),
+        "--project-directory",
+        getcwd(),
+        *args,
+        **kwargs,
     )
 
 

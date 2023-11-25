@@ -1,8 +1,6 @@
 services:
   weather-station-server:
     restart: always
-    build:
-      target: release
     environment:
       - METEO_DB_HOST=weather-station-mysql
       - METEO_DB_NAME=estacion_perseverance
