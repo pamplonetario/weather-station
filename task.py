@@ -13,12 +13,12 @@ def cli():
     @command
     def sh():
         """Open a shell into the server container"""
-        compose_dev("exec", "server", "bash")
+        compose_dev("exec", "weather-station-server", "bash")
 
     @command
     def logs():
         """Display the server container logs"""
-        compose_dev("logs", "-f", "server")
+        compose_dev("logs", "-f", "weather-station-server")
 
     @command
     def publish():
