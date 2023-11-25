@@ -1,19 +1,19 @@
 services:
-  server:
+  weather-station-server:
     build:
       target: development
     volumes:
       - ./src/server:/var/www/html:ro
       - ./src/database:/weather-station/database
     environment:
-      - METEO_DB_HOST=mysql
+      - METEO_DB_HOST=weather-station-mysql
       - METEO_DB_NAME=estacion_perseverance
       - METEO_DB_USERNAME=root
       - METEO_DB_PASSWORD=root
     ports:
       - 127.0.0.1:8000:80
 
-  mysql:
+  weather-station-mysql:
     platform: linux/amd64
     environment:
       - MYSQL_ROOT_PASSWORD=root
@@ -21,13 +21,13 @@ services:
     ports:
       - 127.0.0.1:3306:3306
 
-  phpmyadmin:
+  weather-station-phpmyadmin:
     environment:
-      - PMA_HOST=mysql
+      - PMA_HOST=weather-station-mysql
     ports:
       - 127.0.0.1:8001:80
 
-  grafana:
+  weather-station-grafana:
     ports:
       - 127.0.0.1:8002:80
     environment:

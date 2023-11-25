@@ -1,14 +1,14 @@
 services:
-  server:
+  weather-station-server:
     build:
       context: ./
       dockerfile: src/docker/Dockerfile
 
-  mysql:
+  weather-station-mysql:
     image: mysql:5.7-debian
 
-  phpmyadmin:
+  weather-station-phpmyadmin:
     image: phpmyadmin:5.2
 
-  grafana:
+  weather-station-grafana:
     image: grafana/grafana-oss:10.0.3
