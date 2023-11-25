@@ -3,6 +3,9 @@ services:
     restart: always
     build:
       target: release
+    hostname: weather-station-server
+    networks:
+      - ingress
     environment:
       - METEO_DB_HOST=mysql
       - METEO_DB_NAME=estacion_perseverance
@@ -20,6 +23,9 @@ services:
 
   phpmyadmin:
     restart: always
+    hostname: weather-station-phpmyadmin
+    networks:
+      - ingress
     environment:
       - PMA_HOST=mysql
       - PMA_ABSOLUTE_URI=https://meteomars.pamplonetario.org/meteo/admin/
@@ -27,6 +33,9 @@ services:
   grafana:
     restart: always
     user: ${SERVICES_USER}
+    hostname: weather-station-grafana
+    networks:
+      - ingress
     volumes:
       - ${GRAFANA_DATA}:/var/lib/grafana
     environment:
@@ -34,3 +43,8 @@ services:
       - GF_SERVER_DOMAIN=meteomars.pamplonetario.org
       - GF_SERVER_ROOT_URL=https://meteomars.pamplonetario.org/meteo/grafana/
       - GF_SERVER_SERVE_FROM_SUB_PATH=true
+
+networks:
+  ingress:
+    name: ingress
+    external: true
