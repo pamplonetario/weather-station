@@ -8,55 +8,44 @@ def cli():
     @command
     def up():
         """Start development environment"""
-        compose_dev("up", "--detach", "--build")
+        compose("development")("up", "--detach", "--build")
 
     @command
     def sh():
         """Open a shell into the server container"""
-        compose_dev("exec", "weather-station-server", "bash")
+        compose("development")("exec", "weather-station-server", "bash")
 
     @command
     def logs():
         """Display the server container logs"""
-        compose_dev("logs", "-f", "weather-station-server")
+        compose("development")("logs", "-f", "weather-station-server")
 
     @command
     def publish():
         """Publish a relase build of the service"""
         version = datetime.utcnow().strftime("%Y%m%d_%H%M%S")
         env = dict(environ, TAG=version)
-        compose_build("build", env=env)
-        compose_build("push", "weather-station-server", env=env)
+        compose("build")("build", env=env)
+        compose("build")("push", "weather-station-server", env=env)
 
 
-def compose_dev(*args, **kwargs):
-    cmd(
-        "docker",
-        "compose",
-        "--file",
-        join(getcwd(), "src", "docker", "docker-compose.yml"),
-        "--file",
-        join(getcwd(), "src", "docker", "docker-compose.development.yml"),
-        "--project-directory",
-        getcwd(),
-        *args,
-        **kwargs,
-    )
+def compose(target):
+    def _(*args, **kwargs):
+        compose_files = ["docker-compose.yml", f"docker-compose.{target}.yml"]
+        compose_files_args = sum(
+            (["--file", join(getcwd(), "src", "docker", f)] for f in compose_files), []
+        )
+        cmd(
+            "docker",
+            "compose",
+            *compose_files_args,
+            "--project-directory",
+            getcwd(),
+            *args,
+            **kwargs,
+        )
 
-
-def compose_build(*args, **kwargs):
-    cmd(
-        "docker",
-        "compose",
-        "--file",
-        join(getcwd(), "src", "docker", "docker-compose.yml"),
-        "--file",
-        join(getcwd(), "src", "docker", "docker-compose.build.yml"),
-        "--project-directory",
-        getcwd(),
-        *args,
-        **kwargs,
-    )
+    return _
 
 
 # fmt: off
