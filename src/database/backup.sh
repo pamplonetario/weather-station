@@ -3,7 +3,9 @@ set -euo pipefail
 
 backup_name="${MYSQL_DATABASE}_$(date --utc +'%Y%m%d%H%M%S')"
 echo "Starting backup: ${backup_name}"
-mkdir -p /backups
+if [ ! -d "/backups" ]; then
+  mkdir -p /backups
+fi
 mysqldump \
   --user=root \
   --password="${MYSQL_ROOT_PASSWORD}" \
