@@ -16,5 +16,5 @@ CMD [ "/weather-station/start.sh" ]
 FROM base AS development
 
 FROM base AS release
-COPY ./src/database ./database
+COPY ./src/schema ./schema
 COPY ./src/server /var/www/html

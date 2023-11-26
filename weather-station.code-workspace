@@ -5,8 +5,8 @@
       "path": "./src/server"
     },
     {
-      "name": "Database",
-      "path": "./src/database"
+      "name": "Schema",
+      "path": "./src/schema"
     },
     {
       "name": "Docker",

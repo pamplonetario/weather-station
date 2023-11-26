@@ -4,7 +4,7 @@ services:
       target: development
     volumes:
       - ./src/server:/var/www/html:ro
-      - ./src/database:/weather-station/database
+      - ./src/schema:/weather-station/schema
     environment:
       - METEO_DB_HOST=weather-station-mysql
       - METEO_DB_NAME=estacion_perseverance
