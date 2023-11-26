@@ -9,6 +9,10 @@
       "path": "./src/schema"
     },
     {
+      "name": "Database",
+      "path": "./src/database"
+    },
+    {
       "name": "Docker",
       "path": "./src/docker"
     },

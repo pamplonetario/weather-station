@@ -18,6 +18,8 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=estacion_perseverance
+    volumes:
+      - ./src/database:/weather-station/database:ro
     ports:
       - 127.0.0.1:3306:3306
 
