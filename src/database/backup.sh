@@ -8,6 +8,7 @@ mysqldump \
   --user=root \
   --password="${MYSQL_ROOT_PASSWORD}" \
   --single-transaction=TRUE \
+  --quick \
   --no-create-db \
   --no-create-info \
   "${MYSQL_DATABASE}" |
