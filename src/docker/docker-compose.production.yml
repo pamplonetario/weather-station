@@ -16,7 +16,7 @@ services:
     volumes:
       - ${MYSQL_DATA}:/var/lib/mysql
       - ${COW_PROJECT_PATH}/src/database:/weather-station/database:ro
-      - ${MYSQL_BACKUPS}:/backups
+      - ${MYSQL_BACKUP}:/backup
 
   weather-station-phpmyadmin:
     restart: always
