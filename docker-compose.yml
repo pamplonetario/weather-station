@@ -1,6 +1,5 @@
 services:
   weather-station:
-    image: ghcr.io/pamplonetario/weather-station:${WEATHER_STATION_VERSION:-local}
     build:
       context: ./
       dockerfile: Dockerfile

@@ -2,6 +2,6 @@
 set -euo pipefail
 
 WEATHER_STATION_VERSION="$(date '+%Y%m%d_%H%M%S')"
-export WEATHER_STATION_VERSION
-docker compose build weather-station
-docker compose push weather-station
+WEATHER_STATION_TAG="ghcr.io/pamplonetario/weather-station:${WEATHER_STATION_VERSION}"
+docker build -t "$WEATHER_STATION_TAG" .
+docker push "$WEATHER_STATION_TAG"
