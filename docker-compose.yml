@@ -21,8 +21,6 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=estacion_perseverance
-    volumes:
-      - ./src/database:/weather-station/database:ro
     ports:
       - 127.0.0.1:3306:3306
 
@@ -35,7 +33,7 @@ services:
 
   weather-station-grafana:
     image: grafana/grafana-oss:10.0.3
-    ports:
-      - 127.0.0.1:8002:80
     environment:
       - GF_SERVER_HTTP_PORT=80
+    ports:
+      - 127.0.0.1:8002:80
