@@ -1,6 +1,0 @@
-services:
-  weather-station-server:
-    image: ghcr.io/pamplonetario/weather-station:${TAG}
-    build:
-      target: release
-    platform: linux/amd64
