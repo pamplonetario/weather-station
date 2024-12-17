@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 set -euo pipefail
-(cd /weather-station/schema && ./migrate.sh)
+weather-station-migrate
 exec apache2-foreground

@@ -1,37 +1,37 @@
 services:
-  weather-station:
+  app:
     build:
       context: ./
-      dockerfile: Dockerfile
+      dockerfile: meta/docker/_/Dockerfile
       target: development
     volumes:
+      - ./src/migrations:/app/migrations:ro
       - ./src/server:/var/www/html:ro
-      - ./src/schema:/weather-station/schema
     environment:
-      - METEO_DB_HOST=weather-station-mysql
-      - METEO_DB_NAME=estacion_perseverance
-      - METEO_DB_USERNAME=root
-      - METEO_DB_PASSWORD=root
+      - WEATHER_STATION_DB_HOST=mysql
+      - WEATHER_STATION_DB_NAME=weather-station
+      - WEATHER_STATION_DB_USERNAME=root
+      - WEATHER_STATION_DB_PASSWORD=root
     ports:
       - 127.0.0.1:8000:80
 
-  weather-station-mysql:
+  mysql:
     image: mysql:5.7-debian
     platform: linux/amd64
     environment:
       - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=estacion_perseverance
+      - MYSQL_DATABASE=weather-station
     ports:
       - 127.0.0.1:3306:3306
 
-  weather-station-phpmyadmin:
+  phpmyadmin:
     image: phpmyadmin:5.2
     environment:
-      - PMA_HOST=weather-station-mysql
+      - PMA_HOST=mysql
     ports:
       - 127.0.0.1:8001:80
 
-  weather-station-grafana:
+  grafana:
     image: grafana/grafana-oss:10.0.3
     environment:
       - GF_SERVER_HTTP_PORT=80

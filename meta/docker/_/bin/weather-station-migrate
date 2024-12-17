@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+export DATABASE_URL="mysql://${WEATHER_STATION_DB_USERNAME}:${WEATHER_STATION_DB_PASSWORD}@${WEATHER_STATION_DB_HOST}:3306/${WEATHER_STATION_DB_NAME}"
+export DBMATE_MIGRATIONS_DIR="${WEATHER_STATION_ROOT}/migrations"
+
+dbmate --wait migrate
+echo "Migration finished"
