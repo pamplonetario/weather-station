@@ -6,7 +6,7 @@ RUN curl -fsSL -o ./dbmate https://github.com/amacneil/dbmate/releases/download/
 RUN sha256sum -c dbmate.sha256sum
 RUN chmod +x ./dbmate
 
-FROM php:5.6-apache AS base
+FROM php:8.4-apache AS base
 WORKDIR /w
 RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
 COPY --from=downloader /w/dbmate /usr/local/bin/dbmate

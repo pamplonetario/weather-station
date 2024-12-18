@@ -26,11 +26,11 @@
   <div class="content">
 
     <?php
-      $temperature = $_GET["temperatura"];
-      $humidity = $_GET["humedad"];
-      $pressure = $_GET["presion"];
-      $station = $_GET["estacion"];
-      $password = $_GET["clave"];
+      $temperature = $_GET["temperatura"] ?? null;
+      $humidity = $_GET["humedad"] ?? null;
+      $pressure = $_GET["presion"] ?? null;
+      $station = $_GET["estacion"] ?? null;
+      $password = $_GET["clave"] ?? null;
 
       echo "<h3>Data received</h3>";
       echo "<ul>";
@@ -47,17 +47,17 @@
 
       echo "<h3>Insertion</h3>";
 
-      $meteo_db_host = $_ENV["METEO_DB_HOST"];
-      $meteo_db_name = $_ENV["METEO_DB_NAME"];
-      $meteo_db_username = $_ENV["METEO_DB_USERNAME"];
-      $meteo_db_password = $_ENV["METEO_DB_PASSWORD"];
+      $db_host = $_ENV["WEATHER_STATION_DB_HOST"];
+      $db_name = $_ENV["WEATHER_STATION_DB_NAME"];
+      $db_username = $_ENV["WEATHER_STATION_DB_USERNAME"];
+      $db_password = $_ENV["WEATHER_STATION_DB_PASSWORD"];
 
       try {
         $mysqli = new mysqli(
-          $meteo_db_host,
-          $meteo_db_username,
-          $meteo_db_password,
-          $meteo_db_name
+          $db_host,
+          $db_username,
+          $db_password,
+          $db_name
         );
       } catch(Exception $e) {
         error_log($e->getMessage());
